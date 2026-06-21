@@ -1,8 +1,10 @@
 {
   "name": "phasmo-timer-overlay",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Riccio",
+  "description": "Overlay for the game Phasmophobia",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",

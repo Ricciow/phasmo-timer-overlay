@@ -1,10 +1,8 @@
 import { app, BrowserWindow, screen, globalShortcut } from "electron";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { windowManager } from "node-window-manager";
 import path from "path";
 
-const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 process.env.APP_ROOT = path.join(__dirname, "..");
