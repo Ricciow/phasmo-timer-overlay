@@ -31,7 +31,7 @@ function createWindow() {
     const posY = margin;
 
     win = new BrowserWindow({
-        icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+        icon: path.join(process.env.VITE_PUBLIC, "icon.ico"),
         width: overlayWidth,
         height: overlayHeight,
         x: posX,
