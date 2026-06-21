@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.timers-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-grow: 1;
+}
