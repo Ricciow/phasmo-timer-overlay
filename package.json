@@ -1,7 +1,7 @@
 {
   "name": "phasmo-timer-overlay",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "author": "Riccio",
   "description": "Overlay for the game Phasmophobia",
@@ -14,7 +14,8 @@
   "dependencies": {
     "node-window-manager": "^2.2.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "uiohook-napi": "^1.5.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",

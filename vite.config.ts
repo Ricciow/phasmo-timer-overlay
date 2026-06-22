@@ -12,7 +12,7 @@ export default defineConfig({
         vite: {
           build: {
             rollupOptions: {
-              external: ['node-window-manager', 'extract-file-icon']
+              external: ['node-window-manager', 'extract-file-icon', 'uiohook-napi']
             }
           }
         }
@@ -25,10 +25,10 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
-      external: ['node-window-manager', 'extract-file-icon']
+      external: ['node-window-manager', 'extract-file-icon', 'uiohook-napi']
     }
   },
   optimizeDeps: {
-    exclude: ['node-window-manager', 'extract-file-icon']
+    exclude: ['node-window-manager', 'extract-file-icon', 'uiohook-napi']
   }
 })

@@ -1,7 +1,8 @@
-import { app, BrowserWindow, screen, globalShortcut } from "electron";
+import { app, BrowserWindow, screen } from "electron";
 import { fileURLToPath } from "node:url";
 import { windowManager } from "node-window-manager";
-import path from "path";
+import { uIOhook, UiohookKey } from "uiohook-napi";
+import path from "node:path";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -46,7 +47,6 @@ function createWindow() {
         },
     });
 
-    // Importante: forward: true passa os cliques adiante para o jogo
     win.setIgnoreMouseEvents(true, { forward: true });
 
     win.webContents.on("did-finish-load", () => {
@@ -63,33 +63,46 @@ function createWindow() {
     }
 }
 
-function desregistrarAtalhos() {
+function handleKeyDown(e: any) {
     if (!registradoAtalhos) return;
+
+    switch (e.keycode) {
+        case UiohookKey["1"]:
+            win?.webContents.send("toggle-timer-incenso");
+            break;
+        case UiohookKey["2"]:
+            win?.webContents.send("toggle-timer-hunt-cd");
+            break;
+        case UiohookKey["3"]:
+            win?.webContents.send("toggle-timer-hunt");
+            break;
+        case UiohookKey["4"]:
+            win?.webContents.send("toggle-timer-som");
+            break;
+        case UiohookKey["5"]:
+            win?.webContents.send("toggle-timer-onryo");
+            break;
+        case UiohookKey.Comma:
+            win?.webContents.send("change-map-backward");
+            break;
+        case UiohookKey.Period:
+            win?.webContents.send("change-map-forward");
+            break;
+        case UiohookKey.Space:
+            win?.webContents.send("velocidade-step");
+            break;
+        case UiohookKey.R:
+            win?.webContents.send("reset-timers");
+            break;
+    }
+}
+
+function desregistrarAtalhos() {
     registradoAtalhos = false;
-    globalShortcut.unregister("1");
-    globalShortcut.unregister("2");
-    globalShortcut.unregister("3");
-    globalShortcut.unregister("4");
-    globalShortcut.unregister("5");
-    globalShortcut.unregister(",");
-    globalShortcut.unregister(".");
-    globalShortcut.unregister("Space");
-    globalShortcut.unregister("r");
 }
 
 function registrarAtalhos() {
-    if (registradoAtalhos) return;
     registradoAtalhos = true;
-    
-    globalShortcut.register("1", () => win?.webContents.send("toggle-timer-incenso"));
-    globalShortcut.register("2", () => win?.webContents.send("toggle-timer-hunt-cd"));
-    globalShortcut.register("3", () => win?.webContents.send("toggle-timer-hunt"));
-    globalShortcut.register("4", () => win?.webContents.send("toggle-timer-som"));
-    globalShortcut.register("5", () => win?.webContents.send("toggle-timer-onryo"));
-    globalShortcut.register(",", () => win?.webContents.send("change-map-backward"));
-    globalShortcut.register(".", () => win?.webContents.send("change-map-forward"));
-    globalShortcut.register("Space", () => win?.webContents.send("velocidade-step"));
-    globalShortcut.register("r", () => win?.webContents.send("reset-timers"));
 }
 
 let isGameFocused = true;
@@ -98,6 +111,9 @@ let gameWasOpen = false;
 function startPhasmophobiaMonitor() {
     const TARGET_WINDOW_TITLE = "Phasmophobia";
     
+    uIOhook.on("keydown", handleKeyDown);
+    uIOhook.start();
+
     monitorInterval = setInterval(() => {
         try {
             const allWindows = windowManager.getWindows();
@@ -142,6 +158,7 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {
     if (monitorInterval) clearInterval(monitorInterval);
+    uIOhook.stop();
     if (process.platform !== "darwin") {
         app.quit();
         win = null;
@@ -150,5 +167,5 @@ app.on("window-all-closed", () => {
 
 app.on("will-quit", () => {
     if (monitorInterval) clearInterval(monitorInterval);
-    globalShortcut.unregisterAll();
+    uIOhook.stop();
 });
