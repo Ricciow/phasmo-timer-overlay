@@ -8,3 +8,4 @@ Keybinds 1-5 para timers
 Espaço para contador de passos
 R para reset
 , e . para alteração de tamanho de mapa
+ctrl + esc para fechar o app

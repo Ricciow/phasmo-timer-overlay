@@ -63,7 +63,11 @@ function createWindow() {
     }
 }
 
-function handleKeyDown(e: any) {
+function handleKeyDown(e: { keycode: number; ctrlKey?: boolean, shiftKey?: boolean }) {
+    if (e.ctrlKey && e.keycode === UiohookKey.Escape) {
+        app.quit();
+    }
+
     if (!registradoAtalhos) return;
 
     switch (e.keycode) {
