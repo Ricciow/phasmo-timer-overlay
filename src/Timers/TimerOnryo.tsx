@@ -3,7 +3,7 @@ import { Timer } from "./Timer";
 import { useContext, useEffect, useRef, useState } from "react";
 
 export function TimerOnryo() {
-    const { difficulty, reset } = useContext(Context)!;
+    const { difficulty, reset } = useContext(Context);
     const [tempo, setTempo] = useState(0);
     const primeiro = useRef(true);
 

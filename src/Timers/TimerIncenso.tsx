@@ -3,7 +3,7 @@ import { Timer } from "./Timer";
 import { useContext, useEffect, useState } from "react";
 
 export function TimerIncenso() {
-    const { difficulty, reset } = useContext(Context)!;
+    const { difficulty, reset } = useContext(Context);
     const [tempo, setTempo] = useState(0);
     const [color, setColor] = useState<string | undefined>(undefined);
     const [isSpirit, setIsSpirit] = useState(true);

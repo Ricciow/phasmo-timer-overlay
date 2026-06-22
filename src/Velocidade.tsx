@@ -4,7 +4,7 @@ import { Context } from './ContextProvider';
 
 export function Velocidade() {
     const [velocidade, setVelocidade] = useState<number | string>(0);
-    const { difficulty, reset } = useContext(Context)!;
+    const { difficulty, reset } = useContext(Context);
     const taps = useRef<number[]>([]);
     const resetTimeout = useRef<NodeJS.Timeout | null>(null);
 

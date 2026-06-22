@@ -3,7 +3,7 @@ import "./MapSelector.css"
 import { Context } from "./ContextProvider";
 
 export function MapSelector() {
-    const { difficulty, reset } = useContext(Context)!;
+    const { difficulty, reset } = useContext(Context);
     const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {

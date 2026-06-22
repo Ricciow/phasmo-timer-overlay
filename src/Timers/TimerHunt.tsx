@@ -10,7 +10,7 @@ const TimeMap: Record<Difficulty["difficulty"], number> = {
 };
 
 export function TimerHunt() {
-    const { difficulty, reset } = useContext(Context)!;
+    const { difficulty, reset } = useContext(Context);
     const TEMPO_INICIAL = TimeMap[difficulty] ?? 30;
     const TEMPO_OBAMBO = TEMPO_INICIAL * 0.2;
     const TEMPO_AMALDICOADO = 20;
